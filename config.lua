@@ -3,7 +3,7 @@ Config = {}
 Config.EnableSandyRental = true
 
 -- Rental Locations --
-Config.SandyLocs = {x = 346.16, y = 3406.78, z = 36.53}
+Config.SandyLocs = vector3(346.16, 3406.78, 36.53)
 
 -- Sandy Info --
 Config.SandyBlip = 737 -- https://docs.fivem.net/docs/game-references/blips/

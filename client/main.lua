@@ -19,19 +19,22 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
-  while true do
-    Wait(0)
-    DrawMarker(Config.SandyMarker, Config.SandyLocs.x, Config.SandyLocs.y, Config.SandyLocs.z-1, 0.0, 0.0, 0.0,0.0,0.0,0.0, 1.0,1.0,1.0, Config.SandyMarkerColor.r, Config.SandyMarkerColor.g, Config.SandyMarkerColor.b, Config.SandyMarkerColor.a, false, true, 2, false, nil, nil, false)
-  end
-    
-        
-  local playerCoords = GetEntityCoords(PlayerPedId())
-  for k, v in ipairs(Config.SandyLocs) do
-    local RentalLocation = (v.x, v.y, v.z)
+	while not NetworkIsSessionStarted() do -- Wait for the user to load
+		Wait(500)
+	end
 
-    while #(playerCoords - RentalLocation) <= Config.SandyMarkerScale do
-      Wait(1)
-      print('Works')
+	while true do
+		Citizen.Wait(0)
+		local playerCoords = GetEntityCoords(PlayerPedId())
+
+		-- Check the markers
+    while #(GetEntityCoords(PlayerPedId()) - Config.SandyLocs) <= 1.0 do
+      Citizen.Wait(0)
+      Draw3DText(Config.SandyLocs.x, Config.SandyLocs.y, Config.SandyLocs.z, 0.75, "Press ~y~[E]~w~ to open menu")
+      DrawGroundMarker(Config.SandyLocs.x, Config.SandyLocs.y, Config.SandyLocs.z)
+      if IsControlJustReleased(0, 51) then
+        -- DO WHATEVER YOU WANT HERE
+      end
     end
-  end
+	end
 end)
